@@ -1,5 +1,7 @@
 import pandas as pd
-from lab.processing.configs.config_loader import load_config_file
+
+from lab.processing.configs.data_preprocess import config_preprocess
+from lab.processing.data_wrangling.wrangling import processing
 from logs import Logs
 from pathlib import Path
 
@@ -9,13 +11,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 def main():
     log.info("Initializing data processing")
-    # Load Preprocess Config
-    path_config = BASE_DIR / "lab/processing/configs/data_preprocess.json"
-    config = load_config_file(path_config)
     # Read csv
-    path_data = BASE_DIR / config["raw_file"]
+    path_data = BASE_DIR / config_preprocess["raw_file"]
     df_raw = pd.read_csv(path_data)
     # Processing File Csv
+    data_processed = processing(df_raw, config_preprocess)
     # Save File Csv
 
 
