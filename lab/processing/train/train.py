@@ -7,9 +7,10 @@ import seaborn as sns
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.model_selection import train_test_split
+from utils.utils import BASE_DIR
 
 
-def train_random_forest(df: pd.DataFrame, config: dict) -> RandomForestClassifier:
+def train_random_forest(df: pd.DataFrame, config: dict):
     """
     Train Random Forest Model
     :param df: Dataframe containing the data to train the model on.
@@ -25,12 +26,15 @@ def train_random_forest(df: pd.DataFrame, config: dict) -> RandomForestClassifie
     rf.fit(X_train, y_train)
 
     # Accuracy Score
-    # print(rf.accuracy_score(X_test, y_test))
+    print(rf.accuracy_score(X_test, y_test))
 
     # Metrics
-    # rf.plot_feature_importances(X_train)
-    # rf.plot_confusion_matrix(X_test, y_test, config)
-    return rf
+    rf.plot_feature_importances(X_train)
+    rf.plot_confusion_matrix(X_test, y_test, config)
+
+    # Save Model
+    path = BASE_DIR / config['trained_file']
+    rf.save(path)
 
 
 class RandomForestTrainer:
@@ -54,11 +58,11 @@ class RandomForestTrainer:
         )
         self.clf.fit(X, y)
 
-    def accuracy_score(self, X, y):
+    def accuracy_score(self, X, y) -> float:
         y_pred = self.clf.predict(X)
         return accuracy_score(y, y_pred)
 
-    def _feature_importances(self, X_train):
+    def _feature_importances(self, X_train) -> (np.ndarray, np.ndarray):
         importances = self.clf.feature_importances_
         indices = np.argsort(importances)[::-1]
         features = X_train.columns[indices]

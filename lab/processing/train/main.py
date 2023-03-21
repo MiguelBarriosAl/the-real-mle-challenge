@@ -15,10 +15,8 @@ def main():
     df = pd.read_csv(path_data)
     nan_df = df[df.isna().sum(axis=1) > 0]
     # Training Model
-    rf_trainer = train_random_forest(df, config_train)
-    # Save Model
-    path = BASE_DIR / config_train['trained_file']
-    rf_trainer.save(path)
+    train_random_forest(df, config_train)
+
 
 
 if __name__ == "__main__":
