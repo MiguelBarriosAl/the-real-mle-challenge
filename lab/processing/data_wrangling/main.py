@@ -1,8 +1,8 @@
 import pandas as pd
 
-from lab.processing.configs.data_preprocess import config_preprocess
+from lab.processing.configs.config_preprocess import config_preprocess
 from lab.processing.data_wrangling.wrangling import processing
-from logs import Logs
+from utils.logs import Logs
 from pathlib import Path
 
 log = Logs()
@@ -17,6 +17,7 @@ def main():
     # Processing File Csv
     data_processed = processing(df_raw, config_preprocess)
     # Save File Csv
+    data_processed.to_csv(BASE_DIR / config_preprocess['preprocess_file'])
 
 
 if __name__ == "__main__":

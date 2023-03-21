@@ -1,8 +1,9 @@
 import numpy as np
 
 config_preprocess = {
+    "name": "preprocess",
     "raw_file": "data/raw/listings.csv",
-    "preprocess_file": "data/processed/new_processed_listings.csv",
+    "preprocess_file": "data/processed/processed_listings.csv",
     "min_price": 10,
     "bins_price": [
         10,
