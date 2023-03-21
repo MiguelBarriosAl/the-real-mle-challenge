@@ -3,10 +3,9 @@ import pandas as pd
 from lab.processing.configs.config_preprocess import config_preprocess
 from lab.processing.data_wrangling.wrangling import processing
 from utils.logs import Logs
-from pathlib import Path
+from utils.utils import BASE_DIR
 
 log = Logs()
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 
 def main():
