@@ -5,7 +5,7 @@ from api.app.schemas.payloads import InputData
 
 
 class PricePredictor:
-    def __init__(self, model_path):
+    def __init__(self, model_path: str):
         with open(model_path, "rb") as f:
             self.model = pickle.load(f)
 
