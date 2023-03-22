@@ -23,6 +23,7 @@ def train_random_forest(df: pd.DataFrame, config: dict):
                                                         random_state=config['random_state_split'])
     rf = RandomForestTrainer(config['n_estimators'], config['random_state'], config['class_weight'],
                              config['n_jobs'])
+    print(X_train, y_train)
     rf.fit(X_train, y_train)
 
     # Accuracy Score

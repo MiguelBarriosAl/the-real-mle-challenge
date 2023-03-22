@@ -13,10 +13,8 @@ def main():
     # Load Model
     path_data = BASE_DIR / config_train["preprocess_file"]
     df = pd.read_csv(path_data)
-    nan_df = df[df.isna().sum(axis=1) > 0]
     # Training Model
     train_random_forest(df, config_train)
-
 
 
 if __name__ == "__main__":
